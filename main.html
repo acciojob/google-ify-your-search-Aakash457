@@ -1,69 +1,98 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <a href="https://mail.google.com/">Gmail</a>
-        <a href="https://images.google.com/">Images</a>
+        <a href="https://www.google.com/" class="nav-logo" aria-label="Google home">
+            <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span class="green">l</span><span class="red">e</span>
+        </a>
 
-        <div class="apps-icon" aria-label="Google apps">
-            <span></span><span></span><span></span>
-            <span></span><span></span><span></span>
-            <span></span><span></span><span></span>
+        <div class="nav-links">
+            <a href="https://mail.google.com/">Gmail</a>
+            <a href="https://images.google.com/">Images</a>
         </div>
 
-        <button class="sign-in">Sign in</button>
+        <a href="https://about.google/" class="apps-icon" aria-label="Google apps">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </a>
+
+        <a href="https://accounts.google.com/" class="sign-in">Sign in</a>
     </nav>
 
-    <!-- Main Search Section -->
+    <!-- Main Content -->
     <main class="main-content">
+
         <h1 class="google-logo" aria-label="Google">
             <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span class="green">l</span><span class="red">e</span>
         </h1>
 
+        <!-- Search Form -->
         <form class="search-form" action="https://www.google.com/search" method="GET">
+
             <div class="search-box">
                 <input
                     type="text"
                     name="q"
-                    aria-label="Search Google"
+                    aria-label="Search"
                     autocomplete="off"
-                />
-                <span class="mic-icon" title="Voice search">🎙️</span>
+                >
+
+                <span class="mic-icon" aria-label="Microphone">🎙️</span>
             </div>
 
             <div class="search-buttons">
                 <button type="submit">Google Search</button>
-                <button type="button" onclick="feelingLucky()">I'm Feeling Lucky</button>
+                <button type="button" id="lucky-button">
+                    I'm Feeling Lucky
+                </button>
             </div>
+
         </form>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
+
         <div class="footer-left">
             <span>India</span>
-            <a href="https://policies.google.com/privacy">Privacy</a>
             <a href="https://about.google/">About</a>
         </div>
 
         <div class="footer-right">
             <a href="https://policies.google.com/privacy">Privacy</a>
             <a href="https://policies.google.com/terms">Terms</a>
-            <a href="#" onclick="return false;">Settings</a>
+            <button type="button" id="settings-button">Settings</button>
         </div>
+
     </footer>
 
+    <!-- Settings Menu -->
+    <div class="settings-menu" id="settings-menu" hidden>
+        <a href="https://www.google.com/preferences">Search settings</a>
+        <a href="https://policies.google.com/privacy">Privacy</a>
+        <a href="https://policies.google.com/terms">Terms</a>
+    </div>
+
+    <!-- JavaScript -->
     <script>
-        function feelingLucky() {
-            const query = document.querySelector('input[name="q"]').value.trim();
+        const searchInput = document.querySelector('input[name="q"]');
+        const luckyButton = document.getElementById("lucky-button");
+        const settingsButton = document.getElementById("settings-button");
+        const settingsMenu = document.getElementById("settings-menu");
+
+        // I'm Feeling Lucky button
+        luckyButton.addEventListener("click", function () {
+            const query = searchInput.value.trim();
 
             if (query) {
                 window.location.href =
@@ -71,10 +100,25 @@
                     encodeURIComponent(query) +
                     "&btnI=1";
             } else {
-                document.querySelector('input[name="q"]').focus();
+                searchInput.focus();
             }
-        }
+        });
+
+        // Settings menu toggle
+        settingsButton.addEventListener("click", function () {
+            settingsMenu.hidden = !settingsMenu.hidden;
+        });
+
+        // Close settings menu when clicking outside
+        document.addEventListener("click", function (event) {
+            if (
+                !settingsMenu.contains(event.target) &&
+                !settingsButton.contains(event.target)
+            ) {
+                settingsMenu.hidden = true;
+            }
+        });
     </script>
+
 </body>
 </html>
-```
