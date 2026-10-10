@@ -1,12 +1,80 @@
+```html
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="https://mail.google.com/">Gmail</a>
+        <a href="https://images.google.com/">Images</a>
 
-<html>
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+        <div class="apps-icon" aria-label="Google apps">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </div>
 
-  <body>
-    <!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js"></script>
-  </body>
+        <button class="sign-in">Sign in</button>
+    </nav>
+
+    <!-- Main Search Section -->
+    <main class="main-content">
+        <h1 class="google-logo" aria-label="Google">
+            <span class="blue">G</span><span class="red">o</span><span class="yellow">o</span><span class="blue">g</span><span class="green">l</span><span class="red">e</span>
+        </h1>
+
+        <form class="search-form" action="https://www.google.com/search" method="GET">
+            <div class="search-box">
+                <input
+                    type="text"
+                    name="q"
+                    aria-label="Search Google"
+                    autocomplete="off"
+                />
+                <span class="mic-icon" title="Voice search">🎙️</span>
+            </div>
+
+            <div class="search-buttons">
+                <button type="submit">Google Search</button>
+                <button type="button" onclick="feelingLucky()">I'm Feeling Lucky</button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <span>India</span>
+            <a href="https://policies.google.com/privacy">Privacy</a>
+            <a href="https://about.google/">About</a>
+        </div>
+
+        <div class="footer-right">
+            <a href="https://policies.google.com/privacy">Privacy</a>
+            <a href="https://policies.google.com/terms">Terms</a>
+            <a href="#" onclick="return false;">Settings</a>
+        </div>
+    </footer>
+
+    <script>
+        function feelingLucky() {
+            const query = document.querySelector('input[name="q"]').value.trim();
+
+            if (query) {
+                window.location.href =
+                    "https://www.google.com/search?q=" +
+                    encodeURIComponent(query) +
+                    "&btnI=1";
+            } else {
+                document.querySelector('input[name="q"]').focus();
+            }
+        }
+    </script>
+</body>
 </html>
+```
